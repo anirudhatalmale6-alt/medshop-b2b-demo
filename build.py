@@ -437,18 +437,34 @@ function filtrer0(){
 }
 
 /* --- panier / devis --- */
+/* Le prix qui s'applique reellement a une quantite. La fiche annonce
+   « 6+ 95,72 EUR » : si le panier facture quand meme le prix de 1, l'acheteur
+   le voit au premier coup d'oeil. Le palier est donc recalcule a chaque
+   changement de quantite, pas fige au moment de l'ajout. */
+function prixPalier(p, q){
+  let t = p.paliers[0];
+  for (const x of p.paliers) if (q >= x.q) t = x;
+  return t;
+}
+function palierNom(l){
+  const t = prixPalier(P.find(x => x.ref === l.ref), l.q);
+  return t.q > 1 ? '  \u00b7 palier ' + t.q + '+' : '';
+}
 function ajouter(ref, q){
   const p = P.find(x => x.ref === ref); if (!p) return false;
   const l = panier.find(x => x.ref === ref);
-  if (l) l.q += q; else panier.push({ref, nom: p.nom, q, pu: p.pcaisse});
+  if (l) l.q += q; else panier.push({ref, nom: p.nom, q, pu: 0});
   majPanier(); return true;
 }
 function majPanier(){
+  /* recalcul AVANT de sommer : un ajout peut faire franchir un palier a une
+     ligne deja presente dans la demande */
+  panier.forEach(l => { l.pu = prixPalier(P.find(x => x.ref === l.ref), l.q).p; });
   const n = panier.reduce((s, l) => s + l.q, 0);
   $('#cptr').textContent = n;
   $('#pan-b').innerHTML = panier.length ? panier.map(l => `<div class="li">
       <div><div class="n">${l.nom}</div><div class="r">${l.ref}</div>
-      <div class="q">${l.q} \\u00d7 ${eur(l.pu)}</div></div>
+      <div class="q">${l.q} \\u00d7 ${eur(l.pu)}${palierNom(l)}</div></div>
       <div><div class="p">${eur(l.q * l.pu)}</div>
       <button class="x" data-del="${l.ref}">Retirer</button></div></div>`).join('')
     : '<p class="vide">Votre demande est vide.</p>';
