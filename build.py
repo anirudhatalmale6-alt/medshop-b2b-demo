@@ -11,7 +11,7 @@ une difference dans le rendu vient d'un changement que j'ai fait, jamais du
 generateur.
 """
 import hashlib, html, json, sys
-from data import ARBRE, FACETTES, MARQUES, MARQUE, ACCENT
+from data import ARBRE, FACETTES, MARQUES, MARQUE, ACCENT, ACCENT_D
 
 SORTIE = sys.argv[1] if len(sys.argv) > 1 else 'index.html'
 
@@ -50,6 +50,8 @@ BANDES = {
     'mobilier':    (8000, 250000),   # tables, chariots, lits
     'mobilite':    (4000, 120000),   # fauteuils, deambulateurs
     'dechets':     (30,   2200),     # collecteurs, sacs
+    'psy':         (150,  180000),   # du textile anti-dechirure au mobilier
+    'medicament':  (40,   95000),    # du pilulier au refrigerateur medical
     'labo':        (5,    1500),     # tubes, contenants
 }
 SEUIL_EQUIP = 3000                   # au-dela de 30 EUR l'unite, on vend a l'unite
@@ -117,7 +119,7 @@ def produits():
 CSS = """
 *,*::before,*::after{box-sizing:border-box}
 :root{
-  --ac:__AC__; --ac-d:#0b5590;
+  --ac:__AC__; --ac-d:__ACD__;
   --ink:#12181f; --ink2:#3c4854; --mut:#5f6b78;
   --line:#e2e7ec; --line2:#eef1f4; --bg:#ffffff; --bg2:#f7f9fb;
   --ok:#0d7a4a; --att:#8a5a12;
@@ -298,7 +300,7 @@ h1{font-size:23px;letter-spacing:-.02em;margin:0 0 4px;line-height:1.2}
   .grid{grid-template-columns:1fr}
   .logo{font-size:17px}
 }
-""".replace('__AC__', ACCENT)
+""".replace('__AC__', ACCENT).replace('__ACD__', ACCENT_D)
 
 
 JS = """

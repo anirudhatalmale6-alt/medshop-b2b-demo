@@ -16,7 +16,12 @@ concurrent.
 """
 
 MARQUE = '8MED'          # PLACEHOLDER — le client n'a pas encore donne le nom
-ACCENT = '#0f6fbe'
+ACCENT   = '#c1121f'     # ROUGE, demande du client. 6,22 sur blanc, 5,90 sur
+                         # le fond teinte, et le blanc dessus fait 6,22 aussi :
+                         # il marche comme couleur de texte ET comme fond de
+                         # bouton, ce qui n'est pas vrai de tous les rouges.
+ACCENT_D = '#9b1220'     # survol. Il etait reste BLEU quand j'ai bascule
+                         # l'accent : le bouton virait au bleu marine au survol.
 
 # ---------------------------------------------------------------------------
 # L'arbre. Trois niveaux : rayon > famille > sous-famille.
@@ -161,6 +166,42 @@ ARBRE = [
         ['Collecteurs muraux', 'Collecteurs de paillasse', 'Fûts de regroupement']),
     ('Collecte et transport', 'collecte',
         ['Chariots de collecte', 'Bacs roulants', 'Étiquettes réglementaires']),
+ ]),
+ ('Psychiatrie et santé mentale', 'psy', [
+    ('Sécurité et prévention du risque', 'securite',
+        ['Mobilier anti-ligature', 'Poignées et robinetterie sécurisées',
+         'Vitrage de sécurité', 'Miroirs incassables',
+         'Textiles anti-déchirure']),
+    ('Contention et apaisement', 'apaisement',
+        ['Ceintures de maintien', 'Sangles de lit', 'Couvertures lestées',
+         'Fauteuils d’apaisement', 'Salles de retour au calme']),
+    ('Chambre d’isolement', 'isolement',
+        ['Lits sécurisés', 'Matelas ignifugés', 'Éclairage encastré',
+         'Interphonie et appel malade']),
+    ('Évaluation et suivi', 'evaluation',
+        ['Échelles d’évaluation', 'Classeurs de suivi',
+         'Tablettes de saisie', 'Bracelets d’identification']),
+    ('Activités thérapeutiques', 'therapie',
+        ['Matériel d’ergothérapie', 'Matériel d’art-thérapie',
+         'Stimulation sensorielle', 'Matériel de psychomotricité']),
+ ]),
+ ('Médicament et pharmacie', 'medicament', [
+    ('Stockage et sécurité', 'stockage',
+        ['Armoires à pharmacie', 'Coffres à stupéfiants',
+         'Réfrigérateurs médicaux', 'Enregistreurs de température']),
+    ('Préparation et distribution', 'preparation',
+        ['Piluliers hebdomadaires', 'Sachets de préparation',
+         'Broyeurs et coupe-comprimés', 'Gobelets doseurs',
+         'Chariots de distribution']),
+    ('Administration', 'administration',
+        ['Seringues orales', 'Compte-gouttes', 'Cuillères doseuses',
+         'Nébuliseurs de dose']),
+    ('Traçabilité', 'tracabilite',
+        ['Étiquettes de nominatif', 'Lecteurs de code-barres',
+         'Registres de stupéfiants', 'Scellés de sécurité']),
+    ('Consommables de pharmacie', 'conso_pharma',
+        ['Flacons et piluliers vides', 'Sachets unidose',
+         'Étiquettes vierges', 'Sacs de transport isothermes']),
  ]),
  ('Laboratoire et anatomopathologie', 'labo', [
     ('Prélèvement', 'prelevement',

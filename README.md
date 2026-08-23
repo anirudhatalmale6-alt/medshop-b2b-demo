@@ -6,7 +6,7 @@ de plusieurs milliers de références.
 
 ## Ce qui est réel dans cette maquette
 
-L'**arborescence** : 12 rayons, 49 familles, 184 sous-familles, écrites à la
+L'**arborescence** : 14 rayons, 59 familles, 227 sous-familles, écrites à la
 main d'après la nomenclature du secteur. C'est la pièce qui structure les URL,
 le fil d'Ariane, les facettes disponibles et le référencement.
 
